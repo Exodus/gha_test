@@ -1,0 +1,16 @@
+name: 'PR-Plan'
+on:
+  pull_request:
+    paths:
+      - 'terraform/**'
+    branches:
+      - dev
+    types: [opened, reopened, edited, synchronize]
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run test
+        run: |
+          echo "This is a test only run on a certain condition"
