@@ -8,7 +8,22 @@ on:
     types: [opened, reopened, edited, synchronize]
   workflow_dispatch:
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      src: ${{ steps.changes.outputs.src }}
+      infra: ${{ steps.changes.outputs.infra }}
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dorny/paths-filter@v3
+      id: changes
+      with:
+        filters: |
+          terraform:
+            - 'terraform/**'
   test:
+    needs: changes
+    if: ${{ needs.changes.outputs.terraform == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Run test
