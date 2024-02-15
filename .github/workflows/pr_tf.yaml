@@ -21,6 +21,7 @@ jobs:
         filters: |
           terraform:
             - 'terraform/**'
+        base: ${{ github.head_ref }}
   test:
     needs: changes
     if: ${{ needs.changes.outputs.terraform == 'true' }}
