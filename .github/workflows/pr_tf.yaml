@@ -4,7 +4,7 @@ on:
     paths:
       - 'terraform/**'
     branches:
-      - dev
+      - main
     types: [opened, reopened, edited, synchronize]
   workflow_dispatch:
 jobs:
